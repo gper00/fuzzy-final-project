@@ -48,16 +48,20 @@ def m_daya_sedang(x):
 def m_daya_tinggi(x):
     return trapmf(x, [1400, 2000, 2200, 2200])
 
-# --- Waktu Penggunaan (0 - 24 Jam) ---
+# --- Jam Operasional (0 - 24 Jam) ---
+# Optimized overlaps to remove dead zones at 6:00, 17:00, and 22:00
 def m_waktu_off_peak(x):
-    p1 = trapmf(x, [0, 0, 4, 6])
-    p2 = trapmf(x, [22, 23, 24, 24])
+    # Transition: Off-peak (0-8) and (20-24)
+    p1 = trapmf(x, [0, 0, 5, 8])
+    p2 = trapmf(x, [20, 22, 24, 24])
     return np.maximum(p1, p2)
 
 def m_waktu_normal(x):
-    return trimf(x, [6, 11.5, 17])
+    # Transition: 5 to 19 (Peak at 12)
+    return trimf(x, [5, 12, 19])
 
 def m_waktu_peak(x):
+    # Transition: 17 to 22 (Peak at 19.5)
     return trimf(x, [17, 19.5, 22])
 
 # --- Prioritas Perangkat (1 - 10) ---
