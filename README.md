@@ -1,16 +1,31 @@
-# Sistem Manajemen Beban Listrik Rumah Tangga Berbasis Logika Fuzzy Mamdani
+# Implementasi Logika Fuzzy Mamdani untuk Optimasi Konsumsi Energi
 
 Proyek ini merupakan implementasi sistem pendukung keputusan yang dirancang untuk mengelola dan mengoptimalkan konsumsi daya listrik pada skala rumah tangga. Dengan memanfaatkan logika fuzzy, sistem ini mampu memberikan rekomendasi tindakan penghematan yang lebih dinamis dan fleksibel dibandingkan dengan sistem kontrol berbasis logika biner konvensional. Pendekatan ini sangat relevan untuk diaplikasikan dalam skema manajemen beban listrik, di mana variabel yang terlibat seringkali memiliki ambiguitas dan ketidakpastian tinggi.
 
-## Deskripsi Sistem dan Arsitektur
+## Fitur Utama Sistem
 
-Sistem ini mengevaluasi tiga parameter utama sebagai masukan untuk menentukan tingkat penghematan yang disarankan. Parameter pertama adalah Daya Aktif yang mencerminkan beban total secara real-time. Parameter kedua adalah Waktu Penggunaan, yang sangat krusial dalam mendeteksi periode beban puncak (peak hours) di mana tarif atau tekanan beban pada jaringan listrik cenderung lebih tinggi. Parameter ketiga adalah Prioritas Perangkat, yang memberikan konteks mengenai seberapa esensial suatu perangkat yang sedang beroperasi bagi pengguna.
+Sistem ini dirancang dengan fokus pada transparansi algoritma dan kemudahan penggunaan, dengan fitur-fitur sebagai berikut:
 
-Seluruh proses perhitungan dilakukan secara manual tanpa bergantung pada pustaka fuzzy eksternal untuk menjaga integritas logika dan kemudahan dalam audit algoritma. Proses dimulai dari tahap fuzzifikasi menggunakan fungsi keanggotaan triangular dan trapezoidal, dilanjutkan dengan tahap inferensi menggunakan operator minimum untuk evaluasi aturan, agregasi menggunakan operator maksimum, dan diakhiri dengan defuzzifikasi menggunakan metode Centroid (Center of Area).
+*   **Fuzzifikasi Manual**: Seluruh perhitungan fungsi keanggotaan dibangun dari dasar menggunakan NumPy tanpa pustaka fuzzy pihak ketiga.
+*   **Inferensi Mamdani**: Menggunakan metode MIN-MAX untuk mengevaluasi derajat keanggotaan terhadap aturan yang telah ditetapkan.
+*   **Defuzzifikasi Centroid**: Menghasilkan nilai crisp yang akurat menggunakan perhitungan Center of Area (CoA).
+*   **Dashboard Interaktif**: Antarmuka berbasis Streamlit untuk simulasi real-time dan analisis visual.
+
+## Variabel Sistem
+
+Untuk menghasilkan keputusan yang tepat, sistem mengevaluasi parameter masukan yang mewakili kondisi penggunaan listrik harian secara komprehensif:
+
+### Variabel Masukan (Input)
+*   **Daya Aktif**: Total beban listrik real-time dengan rentang 0 hingga 2200 Watt (Klasifikasi: Rendah, Sedang, Tinggi).
+*   **Waktu Penggunaan**: Representasi waktu dalam format 24 jam untuk mendeteksi beban puncak (Klasifikasi: Off-peak, Normal, Peak Hour).
+*   **Prioritas Perangkat**: Skala kepentingan operasional perangkat antara 1 hingga 10 (Klasifikasi: Rendah, Sedang, Tinggi).
+
+### Variabel Luaran (Output)
+*   **Rekomendasi Penghematan**: Persentase pengurangan konsumsi yang disarankan dalam rentang 0% hingga 100% (Klasifikasi: Kecil, Sedang, Besar).
 
 ## Basis Aturan (Rule Base)
 
-Berikut adalah daftar lengkap 27 aturan fuzzy yang diimplementasikan ke dalam sistem. Aturan-aturan ini dirancang untuk mencakup seluruh kemungkinan kombinasi kondisi masukan untuk menjamin sistem tetap stabil dalam berbagai skenario penggunaan.
+Basis aturan terdiri dari 27 kombinasi logika yang mencakup seluruh ruang keadaan masukan. Tabel berikut mendefinisikan hubungan antara kondisi masukan dan rekomendasi luaran yang dihasilkan:
 
 | No | Daya Aktif | Waktu Penggunaan | Prioritas Perangkat | Rekomendasi Penghematan |
 |----|------------|------------------|---------------------|--------------------------|
@@ -42,13 +57,24 @@ Berikut adalah daftar lengkap 27 aturan fuzzy yang diimplementasikan ke dalam si
 | 26 | Tinggi     | Peak             | Sedang              | Besar                    |
 | 27 | Tinggi     | Peak             | Tinggi              | Sedang                   |
 
-## Spesifikasi Variabel
+## Struktur Folder
 
-Variabel input Daya Aktif memiliki rentang antara 0 hingga 2200 Watt, yang kemudian dibagi menjadi himpunan fuzzy Rendah, Sedang, dan Tinggi. Variabel Waktu Penggunaan direpresentasikan dalam format 24 jam dengan klasifikasi Off-peak, Normal, dan Peak Hour. Variabel Prioritas Perangkat diukur dalam skala 1 hingga 10 untuk menentukan urgensi operasional perangkat. Luaran sistem berupa persentase Rekomendasi Penghematan yang dikategorikan menjadi Kecil, Sedang, dan Besar.
+Proyek ini diatur secara modular untuk memudahkan pemeliharaan dan pengembangan lebih lanjut:
+*   `app.py`: Berkas utama aplikasi Streamlit.
+*   `fuzzy/`: Direktori inti algoritma (fuzzifikasi, inferensi, defuzzifikasi).
+*   `pages/`: Kumpulan halaman tambahan untuk simulator dan visualisasi data.
+*   `requirements.txt`: Daftar dependensi pustaka Python.
 
-## Prosedur Instalasi dan Operasional
+## Panduan Instalasi dan Penggunaan
 
-Untuk menjalankan aplikasi ini, pengguna harus memiliki lingkungan Python yang telah terinstalasi. Langkah pertama adalah melakukan instalasi seluruh dependensi yang tercantum dalam berkas requirements.txt dengan menjalankan perintah instalasi paket melalui terminal. Setelah dependensi terpenuhi, aplikasi dashboard dapat diluncurkan menggunakan perintah streamlit run terhadap berkas utama app.py. Navigasi di dalam aplikasi memungkinkan pengguna untuk melakukan simulasi perhitungan secara interaktif dan memvisualisasikan seluruh fungsi keanggotaan yang aktif di dalam sistem.
+Ikuti langkah-langkah di bawah ini untuk menjalankan sistem di lingkungan lokal:
 
----
-**Dokumentasi Tugas Akhir Logika Fuzzy**
+1.  Lakukan klon terhadap repositori ini ke direktori lokal Anda.
+2.  Pasang dependensi yang diperlukan melalui terminal dengan perintah:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  Jalankan aplikasi utama menggunakan perintah:
+    ```bash
+    streamlit run app.py
+    ```
