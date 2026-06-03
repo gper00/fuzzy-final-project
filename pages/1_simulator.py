@@ -18,7 +18,7 @@ with col_input:
     
     with st.container(border=True):
         daya = st.slider("Daya Aktif Saat Ini (Watt)", 0, 2200, 1200, help="Total konsumsi daya listrik rumah tangga.")
-        waktu = st.slider("Waktu Penggunaan (Jam)", 0, 23, 19, help="Waktu saat ini dalam format 24 jam.")
+        waktu = st.slider("Jam Operasional (Jam)", 0, 23, 19, help="Waktu saat ini dalam format 24 jam.")
         prioritas = st.slider("Prioritas Perangkat (1-10)", 1, 10, 5, help="1: Sangat Rendah (Lampu Hias), 10: Sangat Tinggi (Kulkas/Medis).")
         
         st.markdown(" ")

@@ -17,7 +17,7 @@ Untuk menghasilkan keputusan yang tepat, sistem mengevaluasi parameter masukan y
 
 ### Variabel Masukan (Input)
 *   **Daya Aktif**: Total beban listrik real-time dengan rentang 0 hingga 2200 Watt (Klasifikasi: Rendah, Sedang, Tinggi).
-*   **Waktu Penggunaan**: Representasi waktu dalam format 24 jam untuk mendeteksi beban puncak (Klasifikasi: Off-peak, Normal, Peak Hour).
+*   **Jam Operasional**: Representasi waktu dalam format 24 jam untuk mendeteksi beban puncak (Klasifikasi: Off-peak, Normal, Peak Hour).
 *   **Prioritas Perangkat**: Skala kepentingan operasional perangkat antara 1 hingga 10 (Klasifikasi: Rendah, Sedang, Tinggi).
 
 ### Variabel Luaran (Output)
@@ -27,7 +27,7 @@ Untuk menghasilkan keputusan yang tepat, sistem mengevaluasi parameter masukan y
 
 Basis aturan terdiri dari 27 kombinasi logika yang mencakup seluruh ruang keadaan masukan. Tabel berikut mendefinisikan hubungan antara kondisi masukan dan rekomendasi luaran yang dihasilkan:
 
-| No | Daya Aktif | Waktu Penggunaan | Prioritas Perangkat | Rekomendasi Penghematan |
+| No | Daya Aktif | Jam Operasional | Prioritas Perangkat | Rekomendasi Penghematan |
 |----|------------|------------------|---------------------|--------------------------|
 | 1  | Rendah     | Off-peak         | Rendah              | Kecil                    |
 | 2  | Rendah     | Off-peak         | Sedang              | Kecil                    |

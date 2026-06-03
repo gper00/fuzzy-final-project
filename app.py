@@ -40,7 +40,7 @@ with col1:
     #### Variabel Masukan dan Luaran
     Untuk mencapai hasil yang akurat, sistem menggunakan variabel-variabel berikut:
     - **Daya Aktif**: Total konsumsi daya listrik real-time (0 - 2200 Watt).
-    - **Waktu Penggunaan**: Jam penggunaan dalam format 24 jam untuk mengidentifikasi beban puncak.
+    - **Jam Operasional**: Jam penggunaan dalam format 24 jam untuk mengidentifikasi beban puncak.
     - **Prioritas Perangkat**: Tingkat kepentingan operasional perangkat (Skala 1 - 10).
     - **Rekomendasi Penghematan**: Luaran sistem berupa persentase penghematan energi (0 - 100%).
 

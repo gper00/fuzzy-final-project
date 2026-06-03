@@ -45,7 +45,7 @@ st.pyplot(fig1)
 st.markdown("---")
 
 # --- Waktu ---
-st.header("Variabel: Waktu Penggunaan")
+st.header("Variabel: Jam Operasional")
 st.markdown("""
 Variabel waktu membagi siklus 24 jam menjadi periode-periode penggunaan yang berbeda. Periode Off-peak 
 mencerminkan waktu istirahat (malam hingga dini hari) di mana beban jaringan umumnya rendah. Periode Normal 
